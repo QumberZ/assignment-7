@@ -6,11 +6,10 @@ import SearchFIeld from "./SearchFIeld";
 function GifCard(props) {
     //destructure props
 const {gif} = props
-const[search2, setSearch2] = useState("")
-const[gifs2, setGifs2] = useState([])
-const[loadData2, setLoadData2] = useState(false);
+const[searchTrend, setSearchTrend] = useState([])
+const[loadTrend, setTrend] = useState(false);
 
-let url = "http://api.giphy.com/v1/gifs/trending?api_key=CSIs6swXccz66TXhQ3EXrafhJUu4Lu5n&q="
+const url = "http://api.giphy.com/v1/gifs/trending?api_key=CSIs6swXccz66TXhQ3EXrafhJUu4Lu5n"
 
 
 function handleSubmit2 (event){
@@ -19,27 +18,26 @@ function handleSubmit2 (event){
  
 }
 
-const searchGif2 = () => {
-    if(search2.length > 0){
-     setLoadData2(true)
-     fetch(url + search2)
+const trendingSearch = () => {
+   
+    
+     setTrend(true)
+     fetch(url)
      .then((res) =>{
-       setLoadData2(false)
+       setTrend(false)
        return res.json()
      })
      .then((res) =>{
-     setGifs2(res.data.map((gif) => {
+     setSearchTrend(res.data.map((gif) => {
        return (gif.images.fixed_height.url)
      
      }))
      })
-}}
+}
 
 
 useEffect(() => {
 }, [])
-
-
 
  return(
 <>
@@ -49,23 +47,21 @@ useEffect(() => {
 
         <label>
           <b>Enter a gif(Trending Search)</b>
-         <input
-           type="info"
-           placeholder="Search Giffy"
-           value={search2}
-         onChange={(gifC)=>setSearch2(gifC.target.value)}
-         />
+        
 </label>
+
          <button className= "Button2"
-         onClick={searchGif2}>
+         onClick={trendingSearch}>
            Search
          </button>
          </form>
         
-             {gifs2.map((giffy)=>{
+             {searchTrend.map((giffy)=>{
                  return (
                    <div className="item">
-                     <img src={giffy}/> 
+                     <img src={giffy}
+                      alt = "trending"
+                      /> 
                    </div>
                  )
                })

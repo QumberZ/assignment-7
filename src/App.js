@@ -8,8 +8,7 @@ import SearchFIeld from './components/SearchFIeld'
  
 function App() {
 const[gifs, setGifs] = useState([])
-const[search, setSearch] = useState("")
-const[getGiffy, setGiffy] = useState([])
+const[regSearch, setRegSearch] = useState("")
 const[loadData, setLoadData] = useState(false);
  
 const url = "http://api.giphy.com/v1/gifs/search?api_key=CSIs6swXccz66TXhQ3EXrafhJUu4Lu5n&q="
@@ -22,10 +21,10 @@ function handleSubmit (event){
 }
  
  
-const searchGif = () => {
-  if(search.length > 0){
+const regularSearch = () => {
+
    setLoadData(true)
-   fetch(url + search)
+   fetch(url + regSearch)
    .then((res) =>{
      setLoadData(false)
      return res.json()
@@ -36,7 +35,8 @@ const searchGif = () => {
    
    }))
    })
-  }}
+  }
+
    
  
 useEffect(() => {
@@ -49,10 +49,6 @@ fetch(url)
 }, [])
 
 
-
-
-
-
  return (   
      <div className="container mt-5">
         <form  onSubmit = {handleSubmit} >
@@ -63,13 +59,13 @@ fetch(url)
          <input
            type="info"
            placeholder="Search Giffy"
-           value={search}
-         onChange={(element)=>setSearch(element.target.value)}
+           value={regSearch}
+         onChange={(element)=>setRegSearch(element.target.value)}
          />
    </label>
 
          <button className= "Button"
-         onClick={searchGif}>
+         onClick={regularSearch}>
            Search
          </button>
         
