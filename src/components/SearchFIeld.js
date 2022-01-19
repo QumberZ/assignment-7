@@ -65,7 +65,7 @@ const randomSearch = async() => {
              
                  
          <div className=" Random mt-5" >
-                <img src={randomGif?.images?.original?.url} 
+                <img src={randomGif.images?.original?.url} 
                 alt={randomGif}
                 ></img>   
                    </div>
